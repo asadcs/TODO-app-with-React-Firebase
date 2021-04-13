@@ -1,0 +1,4 @@
+Error 01 : “Firebase cannot be loading because running scripts is disabled on this system”, VSCode on Windows
+Solution 01: Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
+
