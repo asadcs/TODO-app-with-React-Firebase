@@ -1,21 +1,54 @@
 import React, { useState } from "react";
-import "./App.css";
+import { Button, FormControl, FormHelperText, Input, InputLabel } from "@material-ui/core";
+import ToDo from "./ToDo";
 
 function App() {
+  const [input, setInput] = useState("");
   const [todos, setTodos] = useState([
     "Send an email update to the team: 9am today",
     "Call the design agency to finalize mockups: 1:00pm today",
     "Touch base with recruiters about new role: Tuesday",
     "Meet with the engineering team: Thursday",
   ]);
+  const onChangeHandler = (e) => {
+    setInput(e.target.value);
+  };
+
+  const AddToDo = (e) => {
+    e.preventDefault();
+    console.log("Hello the button is clicked");
+    setTodos([...todos, input]);
+    setInput("");
+  };
+
   return (
     <div className="App">
       <h1>Hello asadcs</h1>
-      <input />
-      <button>Add Todo</button>
+
+      <form>
+        <FormControl>
+          <InputLabel htmlFor="my-input">Write a ToDo</InputLabel>
+          <Input id="my-input" aria-describedby="my-helper-text"  value={input} onChange={onChangeHandler} />
+          
+        </FormControl>
+
+        {/* <input /> */}
+        {/* <button type="submit" onClick={AddToDo}></button> */}
+        <Button
+          type="submit"
+          onClick={AddToDo}
+          variant="contained"
+          color="secondary"
+          text="Add Todo"
+          disabled={!input}
+        >
+          Secondary
+        </Button>
+      </form>
       <ul>
-        {todos.map((todo) => (
-          <li>{todo}</li>
+        {todos.map((todo, idx) => (
+          // <li key={idx}>{todo}</li>
+          <ToDo idx={idx} todo={todo}></ToDo>
         ))}
       </ul>
     </div>
